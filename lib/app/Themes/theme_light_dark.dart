@@ -3,20 +3,66 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Themes {
-  final lightTheme = ThemeData.light().copyWith(
+  static final darkTheme = ThemeData.dark().copyWith(
       //!------------------------------Colores-------------------------------!//
-      primaryColor: HexColor('#34cafd'),
-      accentColor: HexColor('#ed5477'),
+      primaryColor: HexColor('#000f64'),
+      accentColor: HexColor('#191F32'),
       hintColor: HexColor('#CC0000'),
-      primaryColorLight: HexColor('#5A5D70'),
+      primaryColorLight: HexColor('#edf1fc'),
+      disabledColor: HexColor('#CC0000'),
+      unselectedWidgetColor: HexColor('#B2BFD2'),
       //!------------------------------texto-------------------------------!//
       textTheme: TextTheme(
         //*------------------ titulo
-        headline6: GoogleFonts.roboto(
+        headline6: GoogleFonts.robotoSlab(
           fontWeight: FontWeight.bold,
-          fontSize: 15,
+          fontSize: 22,
+          color: HexColor('#edf1fc'),
+        ),
+
+        //*------------------ subtitulo nivel 1
+        headline5: GoogleFonts.roboto(
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
           letterSpacing: 3,
-          color: HexColor('#5A5D70'),
+          color: HexColor('#edf1fc'),
+        ),
+
+        //*------------------ subtitulo nivel 2
+        headline4: GoogleFonts.ptSerif(
+          //fontWeight: FontWeight.bold,
+          fontSize: 14,
+          letterSpacing: 3,
+          color: HexColor('#edf1fc'),
+        ),
+
+        //*------------------ texto
+        bodyText2: GoogleFonts.ptSerif(
+          fontWeight: FontWeight.bold,
+          fontSize: 14,
+          letterSpacing: 3,
+          color: HexColor('#edf1fc'),
+        ),
+        //!------------------------------boton-------------------------------!//
+      ));
+
+  static final lightTheme = ThemeData.light().copyWith(
+      //!------------------------------Colores-------------------------------!//
+      primaryColor: HexColor('#edf1fc'),
+      accentColor: HexColor('#edf1fc'),
+      hintColor: HexColor('#EB999A'),
+      primaryColorLight: HexColor('#edf1fc'),
+      disabledColor: HexColor('#27CAFF'),
+      unselectedWidgetColor: HexColor('#B2BFD2'),
+
+      //!------------------------------texto-------------------------------!//
+      textTheme: TextTheme(
+        //*------------------ titulo
+        headline6: GoogleFonts.robotoSlab(
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+          letterSpacing: 1,
+          color: HexColor('#27CAFF'),
         ),
 
         //*------------------ subtitulo nivel 1
@@ -29,7 +75,7 @@ class Themes {
 
         //*------------------ subtitulo nivel 2
         headline4: GoogleFonts.ptSerif(
-          fontWeight: FontWeight.bold,
+          //fontWeight: FontWeight.bold,
           fontSize: 14,
           letterSpacing: 3,
           color: HexColor('#5A5D70'),
@@ -38,54 +84,10 @@ class Themes {
         //*------------------ texto
         bodyText2: GoogleFonts.ptSerif(
           fontWeight: FontWeight.bold,
-          fontSize: 12,
+          fontSize: 14,
           letterSpacing: 3,
           color: HexColor('#5A5D70'),
         ),
+        //!------------------------------boton-------------------------------!//
       ));
-
-  final darkTheme = ThemeData.dark().copyWith(
-      //!------------------------------Colores-------------------------------!//
-      primaryColor: HexColor('#531782'),
-      accentColor: HexColor('#000f64'),
-      hintColor: HexColor('#EB999A'),
-      primaryColorLight: HexColor('#edf1fc'),
-      //!------------------------------texto-------------------------------!//
-      textTheme: TextTheme(
-          //*------------------ titulo
-          headline6: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-            letterSpacing: 3,
-            color: HexColor('#EBECEE'),
-          ),
-
-          //*------------------ subtitulo nivel 1
-          headline5: GoogleFonts.roboto(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-            letterSpacing: 3,
-            color: HexColor('#EBECEE'),
-          ),
-
-          //*------------------ subtitulo nivel 2
-          headline4: GoogleFonts.ptSerif(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-            letterSpacing: 3,
-            color: HexColor('#EBECEE'),
-          ),
-
-          //*------------------ texto
-          bodyText2: GoogleFonts.ptSerif(
-            fontWeight: FontWeight.bold,
-            fontSize: 12,
-            letterSpacing: 3,
-            color: HexColor('#EBECEE'),
-          ),
-          //!------------------------------texto-------------------------------!//
-          button: TextStyle(
-            backgroundColor: HexColor('#EB999A'),
-            color: HexColor('#EB999A'),
-          )));
 }

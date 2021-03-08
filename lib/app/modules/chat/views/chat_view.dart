@@ -1,6 +1,5 @@
 import 'package:finanzas_personales/app/Themes/theme_services.dart';
 import 'package:finanzas_personales/app/modules/chat/providers/socket_provider.dart';
-import 'package:finanzas_personales/app/modules/theme/controllers/theme_controller.dart';
 
 import 'package:flutter/material.dart';
 
@@ -48,10 +47,18 @@ class ChatView extends GetView<ChatController> {
               },
               child: ListTile(
                 leading: CircleAvatar(
-                  child: Text(controller.chat[index].name.substring(0, 2)),
+                  child: Text(
+                    controller.chat[index].name.substring(0, 2),
+                  ),
                 ),
-                title: Text(controller.chat[index].name),
-                trailing: Text('${controller.chat[index].votes}'),
+                title: Text(
+                  controller.chat[index].name,
+                  style: Get.theme.textTheme.bodyText2,
+                ),
+                trailing: Text(
+                  '${controller.chat[index].votes}',
+                  style: Get.theme.textTheme.bodyText2,
+                ),
                 onTap: () {
                   print(controller.chat[index].name);
                 },
@@ -77,7 +84,7 @@ class ChatView extends GetView<ChatController> {
               backgroundColor: Get.theme.accentColor,
               child: Icon(Icons.mediation),
               onPressed: () {
-                ThemeService().changeThemeMode();
+                // ThemeService().changeThemeMode();
               }),
           FloatingActionButton(
             child: Icon(Icons.add),

@@ -7,6 +7,8 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const CATEGORY = _Paths.CATEGORY;
   static const THEME = _Paths.THEME;
+  static const SING_IN = _Paths.SING_IN;
+  static const USER_PREFERENCES = _Paths.USER_PREFERENCES;
 }
 
 abstract class _Paths {
@@ -15,4 +17,6 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const CATEGORY = '/category';
   static const THEME = '/theme';
+  static const SING_IN = '/sing-in';
+  static const USER_PREFERENCES = '/user-preferences';
 }

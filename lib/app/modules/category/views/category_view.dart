@@ -176,6 +176,7 @@ class CategoryView extends GetResponsiveView<CategoryController> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
       floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
