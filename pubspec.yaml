@@ -45,6 +45,7 @@ dependencies:
   #*------Utilidades------*#
   flutter_form_builder: ^4.2.0
   vibration: ^1.7.3
+  pull_to_refresh: 1.6.3
 
 dev_dependencies:
   flutter_test:

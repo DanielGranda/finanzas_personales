@@ -7,7 +7,7 @@ class Themes {
       //!------------------------------Colores-------------------------------!//
       primaryColor: HexColor('#000f64'),
       accentColor: HexColor('#191F32'),
-      hintColor: HexColor('#CC0000'),
+      hintColor: HexColor('#27CAFF'),
       primaryColorLight: HexColor('#edf1fc'),
       disabledColor: HexColor('#CC0000'),
       unselectedWidgetColor: HexColor('#B2BFD2'),
@@ -51,7 +51,7 @@ class Themes {
       primaryColor: HexColor('#edf1fc'),
       accentColor: HexColor('#edf1fc'),
       hintColor: HexColor('#EB999A'),
-      primaryColorLight: HexColor('#edf1fc'),
+      primaryColorLight: HexColor('#191F32'),
       disabledColor: HexColor('#27CAFF'),
       unselectedWidgetColor: HexColor('#B2BFD2'),
 

@@ -1,8 +1,8 @@
 import 'package:finanzas_personales/app/modules/SingIn/views/sing_in_view.dart';
 import 'package:finanzas_personales/app/modules/category/views/category_view.dart';
-import 'package:finanzas_personales/app/modules/chat/views/chat_view.dart';
 import 'package:finanzas_personales/app/modules/home/controllers/bottom_navigation_controller.dart';
-import 'package:finanzas_personales/app/modules/login/views/login_view.dart';
+import 'package:finanzas_personales/app/modules/real_chat/views/chat_private_view.dart';
+import 'package:finanzas_personales/app/modules/real_chat/views/real_chat_view.dart';
 import 'package:finanzas_personales/app/modules/user_preferences/views/user_preferences_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,11 +19,13 @@ class HomeView extends StatelessWidget {
               index: _.tabIndex,
               children: [
                 //!-------------------Páginas------------------!//
-                CategoryView(),
-                SingInView(),
-                // LoginView(),
-                ChatView(),
+                ChatPrivateView(),
+                RealChatView(),
                 UserPreferencesView(),
+                SingInView(),
+                CategoryView(),
+                // LoginView(),
+                //ChatView(),
               ],
             ),
             //!-------------------Barra inferior de navegación------------------!//

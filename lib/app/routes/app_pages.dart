@@ -10,6 +10,8 @@ import 'package:finanzas_personales/app/modules/home/bindings/home_binding.dart'
 import 'package:finanzas_personales/app/modules/home/views/home_view.dart';
 import 'package:finanzas_personales/app/modules/login/bindings/login_binding.dart';
 import 'package:finanzas_personales/app/modules/login/views/login_view.dart';
+import 'package:finanzas_personales/app/modules/real_chat/bindings/real_chat_binding.dart';
+import 'package:finanzas_personales/app/modules/real_chat/views/real_chat_view.dart';
 import 'package:finanzas_personales/app/modules/theme/bindings/theme_binding.dart';
 import 'package:finanzas_personales/app/modules/theme/views/theme_view.dart';
 import 'package:finanzas_personales/app/modules/user_preferences/bindings/user_preferences_binding.dart';
@@ -55,6 +57,11 @@ class AppPages {
       name: _Paths.USER_PREFERENCES,
       page: () => UserPreferencesView(),
       binding: UserPreferencesBinding(),
+    ),
+    GetPage(
+      name: _Paths.REAL_CHAT,
+      page: () => RealChatView(),
+      binding: RealChatBinding(),
     ),
   ];
 }
