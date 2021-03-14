@@ -9,12 +9,12 @@ import 'package:get/get.dart';
 
 abstract class DependencyInjection {
   static void init() async {
-    Get.lazyPut(() => SingInController());
-    Get.lazyPut(() => CategoryController());
-    Get.lazyPut(() => ChatController());
-    Get.lazyPut(() => SocketController());
-    Get.lazyPut(() => ThemeController());
-    Get.lazyPut(() => UserPreferencesController());
-    Get.lazyPut(() => RealChatController());
+    Get.lazyPut(() => SingInController(), fenix: true);
+    Get.lazyPut(() => CategoryController(), fenix: true);
+    Get.lazyPut(() => ChatController(), fenix: true);
+    Get.lazyPut(() => SocketController(), fenix: true);
+    Get.lazyPut(() => ThemeController(), fenix: true);
+    Get.lazyPut(() => UserPreferencesController(), fenix: true);
+    Get.lazyPut(() => RealChatController(), fenix: true);
   }
 }

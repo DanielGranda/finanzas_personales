@@ -10,6 +10,7 @@ abstract class Routes {
   static const SING_IN = _Paths.SING_IN;
   static const USER_PREFERENCES = _Paths.USER_PREFERENCES;
   static const REAL_CHAT = _Paths.REAL_CHAT;
+  static const LANDING = _Paths.LANDINGPAGE;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const SING_IN = '/sing-in';
   static const USER_PREFERENCES = '/user-preferences';
   static const REAL_CHAT = '/real-chat';
+  static const LANDINGPAGE = '/landing';
 }

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:finanzas_personales/app/modules/chat/providers/socket_provider.dart';
 import 'package:finanzas_personales/app/modules/chat/models/chat_models.dart';
 

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:finanzas_personales/app/modules/SingIn/controllers/sing_in_controller.dart';
 import 'package:finanzas_personales/app/modules/real_chat/controllers/real_chat_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,13 @@ class ChatPrivateView extends GetView<RealChatController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('ChatPrivateView'),
+          title: GetBuilder<SingInController>(
+            init: SingInController(),
+            builder: (_) {
+              return Text(_.usuario.nombre,
+                  style: Get.theme.textTheme.headline6);
+            },
+          ),
           centerTitle: true,
         ),
         body: Container(

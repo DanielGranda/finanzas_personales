@@ -1,3 +1,4 @@
+import 'package:finanzas_personales/app/modules/SingIn/views/landing_page_view.dart';
 import 'package:get/get.dart';
 
 import 'package:finanzas_personales/app/modules/SingIn/bindings/sing_in_binding.dart';
@@ -20,12 +21,15 @@ import 'package:finanzas_personales/app/modules/user_preferences/views/user_pref
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.LANDING;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),
+      transition: Transition.zoom,
+      transitionDuration: Duration(seconds: 2),
+      opaque: true,
       binding: HomeBinding(),
     ),
     GetPage(
@@ -62,6 +66,11 @@ class AppPages {
       name: _Paths.REAL_CHAT,
       page: () => RealChatView(),
       binding: RealChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.LANDINGPAGE,
+      page: () => LandingPageView(),
+      binding: SingInBinding(),
     ),
   ];
 }

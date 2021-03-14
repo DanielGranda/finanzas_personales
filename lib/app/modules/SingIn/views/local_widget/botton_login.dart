@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:finanzas_personales/app/modules/SingIn/controllers/sing_in_controller.dart';
 import 'package:finanzas_personales/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,9 @@ class BottonLogin extends GetView<SingInController> {
                   ? Container(
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              colors: [Colors.orange[200], Colors.red[400]],
+                              colors: controller.autenticando.value
+                                  ? [Colors.grey[200], Colors.grey[400]]
+                                  : [Colors.orange[200], Colors.red[400]],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight),
                           borderRadius: BorderRadius.circular(30),
@@ -56,10 +59,37 @@ class BottonLogin extends GetView<SingInController> {
                           ? IconButton(
                               color: Colors.white,
                               onPressed: () async {
-                                if (await Vibration.hasVibrator()) {
-                                  Vibration.vibrate();
-                                  Get.toNamed(Routes.HOME);
-                                }
+                                FocusScope.of(context).unfocus();
+                                if (controller.signUpKey.currentState
+                                    .saveAndValidate()) {
+                                  final registroOk = await controller.registro(
+                                      controller.signUpKey.currentState
+                                          .value['userUp'.trim()],
+                                      controller.signUpKey.currentState
+                                          .value['emailUp'.trim()],
+                                      controller.signUpKey.currentState
+                                          .value['passwordUp'.trim()]);
+                                  if (registroOk == true) {
+                                    //todo socket login
+                                    Get.offNamed(Routes.HOME);
+                                  } else {
+                                    Get.defaultDialog(
+                                      title: 'Registro Incorrecto',
+                                      middleText: registroOk,
+                                      middleTextStyle:
+                                          Get.theme.textTheme.bodyText1,
+                                      radius: 20,
+                                    );
+                                  }
+
+                                  print(
+                                    controller.signUpKey.currentState.value,
+                                  );
+
+                                  if (await Vibration.hasVibrator()) {
+                                    Vibration.vibrate();
+                                  }
+                                } else {}
                               },
                               icon: Icon(
                                 Icons.arrow_forward,
@@ -69,10 +99,35 @@ class BottonLogin extends GetView<SingInController> {
                           : IconButton(
                               color: Colors.white,
                               onPressed: () async {
-                                if (await Vibration.hasVibrator()) {
-                                  Vibration.vibrate();
-                                }
-                                Get.toNamed(Routes.CATEGORY);
+                                FocusScope.of(context).unfocus();
+                                if (controller.signInKey.currentState
+                                    .saveAndValidate()) {
+                                  final loginOk = await controller.login(
+                                      controller.signInKey.currentState
+                                          .value['email'.trim()],
+                                      controller.signInKey.currentState
+                                          .value['password'.trim()]);
+                                  if (loginOk) {
+                                    //todo socket login
+                                    Get.offNamed(Routes.HOME);
+                                  } else {
+                                    Get.defaultDialog(
+                                      title: 'Login Incorrecto',
+                                      middleText: 'Revisar credenciales',
+                                      middleTextStyle:
+                                          Get.theme.textTheme.bodyText1,
+                                      radius: 20,
+                                    );
+                                  }
+
+                                  print(
+                                    controller.signInKey.currentState.value,
+                                  );
+
+                                  if (await Vibration.hasVibrator()) {
+                                    Vibration.vibrate();
+                                  }
+                                } else {}
                               },
                               icon: Icon(
                                 Icons.arrow_forward_ios_rounded,

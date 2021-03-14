@@ -1,14 +1,13 @@
 import 'dart:ui';
 
 import 'package:finanzas_personales/app/Themes/Theme_services.dart';
+import 'package:finanzas_personales/app/modules/SingIn/controllers/sing_in_controller.dart';
 import 'package:finanzas_personales/app/routes/app_pages.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:vibration/vibration.dart';
 
 import '../controllers/user_preferences_controller.dart';
@@ -165,7 +164,7 @@ class UserPreferencesView extends GetView<UserPreferencesController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Configuracion App',
+                            'Tema App',
                             style: Get.theme.textTheme.headline4,
                           ),
                           IconButton(
@@ -180,6 +179,38 @@ class UserPreferencesView extends GetView<UserPreferencesController> {
                                   Vibration.vibrate();
                                 }
                                 Get.snackbar('Tema', 'Modo activado');
+                              }),
+                        ],
+                      ),
+                    ),
+                  ),
+                  //!-------------------LogOut------------------!//
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.white70, width: 1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    color: Get.theme.accentColor.withOpacity(0.5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Salie App',
+                            style: Get.theme.textTheme.headline4,
+                          ),
+                          IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.signOutAlt,
+                                color: Get.theme.disabledColor,
+                              ),
+                              onPressed: () {
+                                //TODO DESCONECTAR SOCKET
+                                final SingInController c =
+                                    Get.put(SingInController());
+                                Get.offNamed(Routes.SING_IN);
+                                c.logut();
                               }),
                         ],
                       ),

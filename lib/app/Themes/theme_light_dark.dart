@@ -83,11 +83,14 @@ class Themes {
 
         //*------------------ texto
         bodyText2: GoogleFonts.ptSerif(
-          fontWeight: FontWeight.bold,
           fontSize: 14,
-          letterSpacing: 3,
           color: HexColor('#5A5D70'),
         ),
+        bodyText1: GoogleFonts.ptSerif(
+          fontSize: 14,
+          color: HexColor('#5A5D70'),
+        ),
+
         //!------------------------------boton-------------------------------!//
       ));
 }

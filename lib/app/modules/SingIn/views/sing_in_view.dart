@@ -1,7 +1,6 @@
-import 'package:finanzas_personales/app/Themes/theme_services.dart';
-
 import 'package:finanzas_personales/app/utils/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,6 +10,8 @@ import 'package:vibration/vibration.dart';
 
 import '../controllers/sing_in_controller.dart';
 import 'local_widget/botton_login.dart';
+import 'local_widget/form_builder_general.dart';
+import 'local_widget/form_login_mail.dart';
 
 class SingInView extends GetView<SingInController> {
   @override
@@ -52,7 +53,7 @@ class SingInView extends GetView<SingInController> {
                           ],
                         ),
                         SizedBox(
-                          height: 5,
+                          height: 2,
                         ),
                         Text(
                           controller.isSignupScreen.value
@@ -71,14 +72,15 @@ class SingInView extends GetView<SingInController> {
               // Trick to add the shadow for the submit button
               BottonLogin(showShadow: true),
               //Main Contianer for Login and Signup
+              //!-------------Tarjeta de Registro-----------!//
               AnimatedPositioned(
                 duration: Duration(milliseconds: 700),
                 curve: Curves.bounceInOut,
-                top: controller.isSignupScreen.value ? 200 : 230,
+                top: controller.isSignupScreen.value ? 180 : 180,
                 child: AnimatedContainer(
                   duration: Duration(milliseconds: 700),
                   curve: Curves.bounceInOut,
-                  height: controller.isSignupScreen.value ? 380 : 250,
+                  height: controller.isSignupScreen.value ? 400 : 300,
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width - 40,
                   margin: EdgeInsets.symmetric(horizontal: 20),
@@ -94,68 +96,205 @@ class SingInView extends GetView<SingInController> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {
-                                controller.isSignupScreen.value = false;
-                              },
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "INGRESO",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: !controller.isSignupScreen.value
-                                            ? Palette.activeColor
-                                            : Palette.textColor1),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.isSignupScreen.value = false;
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "INGRESO",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                !controller.isSignupScreen.value
+                                                    ? Palette.activeColor
+                                                    : Palette.textColor1),
+                                      ),
+                                      if (!controller.isSignupScreen.value)
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          height: 2,
+                                          width: 55,
+                                          color: Colors.orange,
+                                        )
+                                    ],
                                   ),
-                                  if (!controller.isSignupScreen.value)
-                                    Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      height: 2,
-                                      width: 55,
-                                      color: Colors.orange,
-                                    )
-                                ],
-                              ),
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    if (await Vibration.hasVibrator()) {
+                                      Vibration.vibrate();
+                                    }
+                                    controller.isSignupScreen.value = true;
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "REGISTRO",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color:
+                                                controller.isSignupScreen.value
+                                                    ? Palette.activeColor
+                                                    : Palette.textColor1),
+                                      ),
+                                      if (controller.isSignupScreen.value)
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3),
+                                          height: 2,
+                                          width: 55,
+                                          color: Colors.orange,
+                                        )
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (await Vibration.hasVibrator()) {
-                                  Vibration.vibrate();
-                                }
-                                controller.isSignupScreen.value = true;
-                              },
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "REGISTRO",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: controller.isSignupScreen.value
-                                            ? Palette.activeColor
-                                            : Palette.textColor1),
-                                  ),
-                                  if (controller.isSignupScreen.value)
+                            if (controller.isSignupScreen.value)
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: Column(
+                                  children: [
+                                    //!-------------SingUp-----------!//
+                                    FormBuilder(
+                                      autovalidateMode: AutovalidateMode.always,
+                                      key: controller.signUpKey,
+                                      initialValue: {
+                                        'date': DateTime.now(),
+                                        'accept_terms': false,
+                                      },
+                                      child: Column(
+                                        children: [
+                                          //!-------------Password SingUp-----------!//
+                                          FormBuilderGeneral(
+                                            name: 'userUp',
+                                            hintText: 'User name',
+                                            icon: Icon(
+                                              FontAwesomeIcons.user,
+                                              color: Palette.iconColor,
+                                            ),
+                                          ),
+                                          SizedBox(height: 15),
+                                          //!-------------Email SingUp-----------!//
+                                          FormLoginBuilderMail(
+                                            name: 'emailUp',
+                                          ),
+                                          SizedBox(height: 15),
+                                          //!-------------Password SingUp-----------!//
+                                          FormBuilderGeneral(
+                                            name: 'passwordUp',
+                                            hintText: '**********',
+                                            icon: Icon(
+                                              FontAwesomeIcons.lock,
+                                              color: Palette.iconColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 3),
-                                      height: 2,
-                                      width: 55,
-                                      color: Colors.orange,
-                                    )
-                                ],
+                                      width: 200,
+                                      margin: EdgeInsets.only(top: 20),
+                                      child: RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                            text:
+                                                "By pressing 'Submit' you agree to our ",
+                                            style: TextStyle(
+                                                color: Palette.textColor2),
+                                            children: [
+                                              TextSpan(
+                                                //recognizer: ,
+                                                text: "term & conditions",
+                                                style: TextStyle(
+                                                    color: Colors.orange),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )
+                            if (!controller.isSignupScreen.value)
+                              Container(
+                                margin: EdgeInsets.only(top: 20),
+                                child: Column(
+                                  children: [
+                                    //!-------------SingIn-----------!//
+                                    FormBuilder(
+                                      autovalidateMode: AutovalidateMode.always,
+                                      key: controller.signInKey,
+                                      initialValue: {
+                                        'date': DateTime.now(),
+                                        'accept_terms': false,
+                                      },
+                                      child: Column(
+                                        children: [
+                                          //!-------------Email SingIn-----------!//
+                                          FormLoginBuilderMail(
+                                            name: 'email',
+                                          ),
+                                          SizedBox(height: 20),
+                                          //!-------------Password SingIn-----------!//
+                                          FormBuilderGeneral(
+                                            name: 'password',
+                                            hintText: '************',
+                                            icon: Icon(
+                                              FontAwesomeIcons.lock,
+                                              color: Palette.iconColor,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Obx(() => Checkbox(
+                                                  value: controller
+                                                      .isRememberMe.value,
+                                                  activeColor:
+                                                      Palette.textColor2,
+                                                  onChanged: (value) {
+                                                    controller.isRememberMe
+                                                            .value =
+                                                        !controller
+                                                            .isRememberMe.value;
+                                                  },
+                                                )),
+                                            Text("Remember me",
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Palette.textColor1))
+                                          ],
+                                        ),
+                                        TextButton(
+                                          onPressed: () {},
+                                          child: Text("Forgot Password?",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Palette.textColor1)),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            SizedBox(height: Get.height),
                           ],
                         ),
-                        if (controller.isSignupScreen.value)
-                          buildSignupSection(),
-                        if (!controller.isSignupScreen.value)
-                          buildSigninSection()
                       ],
                     ),
                   ),
@@ -164,8 +303,9 @@ class SingInView extends GetView<SingInController> {
               // Trick to add the submit button
               BottonLogin(showShadow: false),
               // Bottom buttons
+              //!-------------Redes Sociales-----------!//
               Positioned(
-                top: MediaQuery.of(context).size.height - 100,
+                top: Get.height - 130,
                 right: 0,
                 left: 0,
                 child: Column(
@@ -193,150 +333,6 @@ class SingInView extends GetView<SingInController> {
         ));
   }
 
-  Container buildSigninSection() {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      child: Column(
-        children: [
-          buildTextField(Icons.mail_outline, "info@demouri.com", false, true),
-          buildTextField(FontAwesomeIcons.lock, "**********", true, false),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Obx(() => Checkbox(
-                        value: controller.isRememberMe.value,
-                        activeColor: Palette.textColor2,
-                        onChanged: (value) {
-                          controller.isRememberMe.value =
-                              !controller.isRememberMe.value;
-                        },
-                      )),
-                  Text("Remember me",
-                      style: TextStyle(fontSize: 12, color: Palette.textColor1))
-                ],
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text("Forgot Password?",
-                    style: TextStyle(fontSize: 12, color: Palette.textColor1)),
-              )
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Container buildSignupSection() {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      child: Column(
-        children: [
-          buildTextField(FontAwesomeIcons.user, "User Name", false, false),
-          buildTextField(FontAwesomeIcons.carSide, "email", false, true),
-          buildTextField(FontAwesomeIcons.lock, "password", true, false),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 10),
-            child: Obx(() => Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        controller.isMale.value = true;
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 30,
-                            height: 30,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                color: controller.isMale.value
-                                    ? Palette.textColor2
-                                    : Colors.transparent,
-                                border: Border.all(
-                                    width: 1,
-                                    color: controller.isMale.value
-                                        ? Colors.transparent
-                                        : Palette.textColor1),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Icon(
-                              FontAwesomeIcons.satellite,
-                              color: controller.isMale.value
-                                  ? Colors.white
-                                  : Palette.iconColor,
-                            ),
-                          ),
-                          Text(
-                            "Male",
-                            style: TextStyle(color: Palette.textColor1),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        controller.isMale.value = false;
-                      },
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 30,
-                            height: 30,
-                            margin: EdgeInsets.only(right: 8),
-                            decoration: BoxDecoration(
-                                color: controller.isMale.value
-                                    ? Colors.transparent
-                                    : Palette.textColor2,
-                                border: Border.all(
-                                    width: 1,
-                                    color: controller.isMale.value
-                                        ? Palette.textColor1
-                                        : Colors.transparent),
-                                borderRadius: BorderRadius.circular(15)),
-                            child: Icon(
-                              FontAwesomeIcons.user,
-                              color: controller.isMale.value
-                                  ? Palette.iconColor
-                                  : Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "Female",
-                            style: TextStyle(color: Palette.textColor1),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                )),
-          ),
-          Container(
-            width: 200,
-            margin: EdgeInsets.only(top: 20),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                  text: "By pressing 'Submit' you agree to our ",
-                  style: TextStyle(color: Palette.textColor2),
-                  children: [
-                    TextSpan(
-                      //recognizer: ,
-                      text: "term & conditions",
-                      style: TextStyle(color: Colors.orange),
-                    ),
-                  ]),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   TextButton buildTextButton(
       IconData icon, String title, Color backgroundColor) {
     return TextButton(
@@ -346,7 +342,7 @@ class SingInView extends GetView<SingInController> {
           minimumSize: Size(145, 40),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          primary: Colors.white,
+          primary: Get.theme.primaryColorLight.withOpacity(0.3),
           backgroundColor: backgroundColor),
       child: Row(
         children: [
@@ -360,34 +356,6 @@ class SingInView extends GetView<SingInController> {
             title,
           )
         ],
-      ),
-    );
-  }
-
-  Widget buildTextField(
-      IconData icon, String hintText, bool isPassword, bool isEmail) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
-      child: TextField(
-        obscureText: isPassword,
-        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
-        decoration: InputDecoration(
-          prefixIcon: Icon(
-            icon,
-            color: Palette.iconColor,
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Palette.textColor1),
-            borderRadius: BorderRadius.all(Radius.circular(35.0)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Palette.textColor1),
-            borderRadius: BorderRadius.all(Radius.circular(35.0)),
-          ),
-          contentPadding: EdgeInsets.all(10),
-          hintText: hintText,
-          hintStyle: TextStyle(fontSize: 14, color: Palette.textColor1),
-        ),
       ),
     );
   }
